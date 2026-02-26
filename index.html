@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAKPU WhatsApp Flow - Complete Interactive Mockup</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .controls h3 {
+            color: #075E54;
+            margin-bottom: 15px;
+        }
+
+        .step-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .step-btn {
+            padding: 12px 15px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .step-btn:hover:not(:disabled) {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .step-btn.active {
+            background: #075E54;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.3);
+        }
+
+        .step-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .phone-mockup {
+            background: white;
+            border-radius: 30px;
+            padding: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .phone-header {
+            background: #075E54;
+            color: white;
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phone-header .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #075E54;
+            font-size: 1.2rem;
+        }
+
+        .phone-header .title {
+            flex: 1;
+        }
+
+        .phone-header .title h3 {
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+        }
+
+        .phone-header .title p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .chat-area {
+            background: #E5DDD5;
+            min-height: 500px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .chat-area::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-area::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            animation: messageSlide 0.3s ease-out;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.bot {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .message.user {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            max-width: 85%;
+            padding: 10px 15px;
+            border-radius: 10px;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+
+        .message.bot .message-bubble {
+            background: white;
+            border-radius: 0 10px 10px 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .message.user .message-bubble {
+            background: #DCF8C6;
+            border-radius: 10px 0 10px 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .input-area {
+            padding: 15px;
+            background: #f0f0f0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .input-area button {
+            padding: 12px 20px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .input-area button:hover {
+            background: #128C7E;
+        }
+
+        .quick-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .quick-btn {
+            padding: 10px 15px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 100px;
+            font-weight: 600;
+        }
+
+        .quick-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .menu-options {
+            background: rgba(7, 94, 84, 0.05);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 3px solid #25D366;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin: 0 3px;
+        }
+
+        .status-badge.success {
+            background: #25D366;
+            color: white;
+        }
+
+        .status-badge.pending {
+            background: #FFA500;
+            color: white;
+        }
+
+        .status-badge.info {
+            background: #2196F3;
+            color: white;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #666;
+            animation: loading 1.4s infinite ease-in-out both;
+            margin: 0 3px;
+        }
+
+        .loading:nth-child(1) { animation-delay: -0.32s; }
+        .loading:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes loading {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 20px;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #25D366, #128C7E);
+            height: 100%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        pre {
+            background: rgba(0,0,0,0.05);
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            margin: 5px 0;
+        }
+
+        strong {
+            color: #075E54;
+        }
+
+        .info-box {
+            background: #E3F2FD;
+            border-left: 4px solid #2196F3;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .warning-box {
+            background: #FFF3E0;
+            border-left: 4px solid #FF9800;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .success-box {
+            background: #E8F5E9;
+            border-left: 4px solid #4CAF50;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .legend {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .reset-btn {
+            background: #f44336;
+            padding: 12px 20px;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        .reset-btn:hover {
+            background: #d32f2f;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .step-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏛️ SAKPU WhatsApp Automation</h1>
+            <p>Complete Interactive Journey - Registrasi hingga Hasil Analisis</p>
+        </div>
+
+        <div class="controls">
+            <h3>📍 Navigasi Step-by-Step</h3>
+            <div class="step-buttons">
+                <button class="step-btn active" onclick="goToStep(1)">1️⃣ Registrasi</button>
+                <button class="step-btn" onclick="goToStep(2)">2️⃣ Menu Utama</button>
+                <button class="step-btn" onclick="goToStep(3)">3️⃣ Pilih Simulasi</button>
+                <button class="step-btn" onclick="goToStep(4)">4️⃣ Identitas</button>
+                <button class="step-btn" onclick="goToStep(5)">5️⃣ Info IPLP</button>
+                <button class="step-btn" onclick="goToStep(6)">6️⃣ DPKPU Q1-5</button>
+                <button class="step-btn" onclick="goToStep(7)">7️⃣ Kelengkapan</button>
+                <button class="step-btn" onclick="goToStep(8)">8️⃣ Review</button>
+                <button class="step-btn" onclick="goToStep(9)">9️⃣ Hasil Final</button>
+            </div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #25D366;"></div>
+                    <span>Available</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #075E54;"></div>
+                    <span>Current Step</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #ccc;"></div>
+                    <span>Not Yet</span>
+                </div>
+            </div>
+            <button class="reset-btn" onclick="resetJourney()">🔄 Reset Journey</button>
+        </div>
+
+        <div class="phone-mockup">
+            <div class="phone-header">
+                <div class="avatar"><i class="bi bi-person-circle"></i></div>
+                <div class="title">
+                    <h3>SAKPU - KPPU</h3>
+                    <p id="status-text">online</p>
+                </div>
+            </div>
+            <div class="chat-area" id="chat-area">
+                <!-- Messages will be inserted here -->
+            </div>
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Ketik pesan..." onkeypress="handleEnter(event)">
+                <button onclick="sendMessage()">➤</button>
+            </div>
+            <div class="quick-buttons" id="quick-buttons">
+                <!-- Quick buttons will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+
+        const steps = {
+            1: {
+                messages: [
+                    { type: 'user', text: 'daftar', time: '10:00' },
+                    { type: 'bot', text: '📝 <strong>Registrasi Akun SAKPU</strong><br><br>Halo! Untuk mendaftar, silakan kirim pesan dengan format:<br><br><pre>daftar [Nama] [Email] [Password] [Konfirmasi Password] [Institusi] [Lembaga] [No Telp Kantor]</pre><strong>Contoh:</strong><br><em>daftar Annisa Haryoko annisa@email.com Pass123 Pass123 Kementerian LuarNegeri Diplomat 55446677</em>', time: '10:00' },
+                    { type: 'user', text: 'daftar Annisa Haryoko annisa@email.com Pass123 Pass123 Kementerian LuarNegeri Diplomat 55446677', time: '10:01' },
+                    { type: 'bot', text: '✅ <strong>Selamat Annisa Haryoko!</strong><br><br>Akun Anda berhasil terdaftar di sistem SAKPU!<br><br>📋 <strong>Data Registrasi:</strong><br>• Nama: Annisa Haryoko<br>• Email: annisa@email.com<br>• Institusi: Kementerian Luar Negeri<br>• User ID: 12345<br><br>📧 <strong>Verifikasi Email:</strong><br>Silakan cek email untuk verifikasi.<br><br>━━━━━━━━━━━━━━━<br>📱 <strong>MENU SAKPU</strong><br><br><div class="menu-options">1️⃣ SIMULASI<br>2️⃣ PERMINTAAN<br>3️⃣ RIWAYAT SIMULASI<br>4️⃣ RIWAYAT PERMINTAAN</div><br>Ketik 1-4 untuk memilih', time: '10:02' }
+                ],
+                buttons: [
+                    { text: '1️⃣ Simulasi', value: '1', nextStep: 2 },
+                    { text: '2️⃣ Permintaan', value: '2', nextStep: 2 },
+                    { text: '3️⃣ Riwayat', value: '3', nextStep: 2 }
+                ]
+            },
+            2: {
+                messages: [
+                    { type: 'user', text: 'MENU', time: '10:05' },
+                    { type: 'bot', text: '👋 <strong>Halo, Annisa Haryoko!</strong><br><br>Selamat datang di SAKPU<br><br>━━━━━━━━━━━━━━━<br>📱 <strong>MENU UTAMA</strong><br>━━━━━━━━━━━━━━━<br><br><div class="menu-options">1️⃣ <strong>SIMULASI</strong><br>   Simulasi DPKPU<br><br>2️⃣ <strong>PERMINTAAN</strong><br>   Ajukan permintaan resmi<br><br>3️⃣ <strong>RIWAYAT SIMULASI</strong><br>   Lihat riwayat<br><br>4️⃣ <strong>RIWAYAT PERMINTAAN</strong><br>   Lihat status permintaan</div><br>━━━━━━━━━━━━━━━<br><br>📋 <strong>Info Akun:</strong><br>• Nama: Annisa Haryoko<br>• Status: <span class="status-badge success">✅ Terverifikasi</span>', time: '10:05' }
+                ],
+                buttons: [
+                    { text: '1️⃣ Simulasi', value: '1', nextStep: 3 },
+                    { text: '2️⃣ Permintaan', value: '2', nextStep: 2 },
+                    { text: '3️⃣ Riwayat', value: '3', nextStep: 2 }
+                ]
+            },
+            3: {
+                messages: [
+                    { type: 'user', text: '1', time: '10:06' },
+                    { type: 'bot', text: '🎯 <strong>SIMULASI DPKPU</strong><br>━━━━━━━━━━━━━━━<br><br>Simulasi Daftar Periksa Kebijakan Persaingan Usaha<br><br>📝 <strong>Proses:</strong><br>1. Konfirmasi identitas<br>2. Info kebijakan (IPLP)<br>3. Pertanyaan DPKPU (5)<br>4. Pertanyaan kelengkapan<br>5. Review<br>6. Hasil analisis<br><br>⏱️ Waktu: 15-30 menit<br><br>━━━━━━━━━━━━━━━<br><br>Ketik <strong>MULAI</strong> untuk memulai', time: '10:06' }
+                ],
+                buttons: [
+                    { text: '▶️ MULAI', value: 'MULAI', nextStep: 4 },
+                    { text: '🏠 MENU', value: 'MENU', nextStep: 2 }
+                ]
+            },
+            4: {
+                messages: [
+                    { type: 'user', text: 'MULAI', time: '10:07' },
+                    { type: 'bot', text: '🎯 <strong>SIMULASI DIMULAI</strong><br><br>━━━━━━━━━━━━━━━<br>📋 <strong>STEP 1/5: Identitas</strong><br>━━━━━━━━━━━━━━━<br><br><div class="progress-bar"><div class="progress-fill" style="width: 20%;">20%</div></div><br>Konfirmasi data:<br><br>👤 Nama: Annisa Haryoko<br>📧 Email: annisa@email.com<br>🏢 Institusi: Kementerian Luar Negeri<br>🏛️ Lembaga: Diplomat<br><br>Data sudah benar?', time: '10:07' }
+                ],
+                buttons: [
+                    { text: '✅ YA', value: 'YA', nextStep: 5 },
+                    { text: '❌ TIDAK', value: 'TIDAK', nextStep: 4 }
+                ]
+            },
+            5: {
+                messages: [
+                    { type: 'user', text: 'YA', time: '10:08' },
+                    { type: 'bot', text: '✅ <strong>Data dikonfirmasi!</strong><br><br>━━━━━━━━━━━━━━━<br>📝 <strong>STEP 2/5: Info IPLP</strong><br>━━━━━━━━━━━━━━━<br><br><div class="progress-bar"><div class="progress-fill" style="width: 40%;">40%</div></div><br><div class="info-box">💡 IPLP = Informasi Peraturan dan Latar Belakang Penyusunan</div><br><strong>1. Judul Kebijakan:</strong><br><br>Contoh: "Peraturan Tarif Listrik 2025"<br><br>Ketik judul kebijakan:', time: '10:08' },
+                    { type: 'user', text: 'Peraturan Tarif Gas Industri 2025', time: '10:09' },
+                    { type: 'bot', text: '✅ Judul tersimpan!<br><br><strong>2. Deskripsi Singkat:</strong><br>Jelaskan dalam 2-3 kalimat', time: '10:09' },
+                    { type: 'user', text: 'Mengatur tarif gas untuk industri. Menyeimbangkan kepentingan produsen dan konsumen.', time: '10:10' }
+                ],
+                buttons: [
+                    { text: '➡️ Lanjut', value: 'LANJUT', nextStep: 6 }
+                ]
+            },
+            6: {
+                messages: [
+                    { type: 'bot', text: '✅ Deskripsi tersimpan!<br><br>━━━━━━━━━━━━━━━<br>📊 <strong>STEP 3/5: DPKPU</strong><br>━━━━━━━━━━━━━━━<br><br><div class="progress-bar"><div class="progress-fill" style="width: 60%;">60%</div></div><br><strong>Pertanyaan 1/5:</strong><br><br>Apakah berpotensi <strong>hambatan masuk pasar</strong>?<br><br>A. Ya<br>B. Tidak<br>C. Belum pasti', time: '10:10' },
+                    { type: 'user', text: 'B', time: '10:11' },
+                    { type: 'bot', text: '✅ Tersimpan!<br><br><strong>2/5:</strong> Diskriminasi pelaku usaha?<br><br>A. Ya<br>B. Tidak<br>C. Belum pasti', time: '10:11' },
+                    { type: 'user', text: 'B', time: '10:12' },
+                    { type: 'bot', text: '✅ Tersimpan!<br><br><strong>3/5:</strong> Konsentrasi pasar?<br><br>A/B/C?', time: '10:12' },
+                    { type: 'user', text: 'C', time: '10:13' },
+                    { type: 'bot', text: '✅ Tersimpan!<br><br><strong>4/5:</strong> Pembatasan persaingan?<br><br>A/B/C?', time: '10:13' },
+                    { type: 'user', text: 'B', time: '10:14' },
+                    { type: 'bot', text: '✅ Tersimpan!<br><br><strong>5/5:</strong> Penyalahgunaan posisi dominan?<br><br>A/B/C?', time: '10:14' },
+                    { type: 'user', text: 'C', time: '10:15' }
+                ],
+                buttons: [
+                    { text: '➡️ Lanjut', value: 'LANJUT', nextStep: 7 }
+                ]
+            },
+            7: {
+                messages: [
+                    { type: 'bot', text: '🎉 <strong>DPKPU Selesai!</strong><br><br>━━━━━━━━━━━━━━━<br>📋 <strong>STEP 4/5: Kelengkapan</strong><br>━━━━━━━━━━━━━━━<br><br><div class="progress-bar"><div class="progress-fill" style="width: 80%;">80%</div></div><br><strong>1/3:</strong> Konsultasi publik?<br><br>A. Sudah<br>B. Belum<br>C. Proses', time: '10:15' },
+                    { type: 'user', text: 'A', time: '10:16' },
+                    { type: 'bot', text: '✅ Tersimpan!<br><br><strong>2/3:</strong> Analisis dampak ekonomi?<br><br>A/B/C?', time: '10:16' },
+                    { type: 'user', text: 'A', time: '10:17' },
+                    { type: 'bot', text: '✅ Tersimpan!<br><br><strong>3/3:</strong> Mekanisme pemantauan?<br><br>A/B/C?', time: '10:17' },
+                    { type: 'user', text: 'A', time: '10:18' }
+                ],
+                buttons: [
+                    { text: '➡️ Review', value: 'REVIEW', nextStep: 8 }
+                ]
+            },
+            8: {
+                messages: [
+                    { type: 'bot', text: '🎊 <strong>Semua selesai!</strong><br><br>━━━━━━━━━━━━━━━<br>📝 <strong>STEP 5/5: Review</strong><br>━━━━━━━━━━━━━━━<br><br><div class="progress-bar"><div class="progress-fill" style="width: 100%;">100%</div></div><br><strong>RINGKASAN:</strong><br><br><div class="info-box"><strong>Kebijakan:</strong><br>Peraturan Tarif Gas Industri 2025<br><br><strong>DPKPU:</strong><br>• Hambatan: Tidak<br>• Diskriminasi: Tidak<br>• Konsentrasi: Belum pasti<br>• Pembatasan: Tidak<br>• Penyalahgunaan: Belum pasti<br><br><strong>Kelengkapan:</strong><br>• Konsultasi: ✅<br>• Analisis: ✅<br>• Pemantauan: ✅</div><br><div class="warning-box">⚖️ <strong>PERNYATAAN:</strong><br>1. Informasi benar<br>2. Hasil indikatif<br>3. Siap melengkapi dokumen</div><br>Setuju?', time: '10:18' }
+                ],
+                buttons: [
+                    { text: '✅ SETUJU', value: 'SETUJU', nextStep: 9 },
+                    { text: '🔍 REVIEW', value: 'REVIEW', nextStep: 8 }
+                ]
+            },
+            9: {
+                messages: [
+                    { type: 'user', text: 'SETUJU', time: '10:19' },
+                    { type: 'bot', text: '⏳ Memproses analisis...', time: '10:19' },
+                    { type: 'bot', text: '🎉 <strong>SELESAI!</strong><br><br>━━━━━━━━━━━━━━━<br>📊 <strong>HASIL ANALISIS</strong><br>━━━━━━━━━━━━━━━<br><br><div class="success-box"><strong>Nomor:</strong> SIM-2025-001<br><strong>Tanggal:</strong> ' + new Date().toLocaleDateString('id-ID') + '<br><strong>User:</strong> Annisa Haryoko</div><br><strong>🎯 KEBIJAKAN:</strong><br>Peraturan Tarif Gas Industri 2025<br><br><strong> ANALISIS:</strong><br><br><div class="success-box"><span class="status-badge success">RISIKO: RENDAH</span><br><br><strong>Temuan:</strong><br>1. Tidak ada hambatan masuk<br>2. Tidak diskriminatif<br>3. Perlu kajian konsentrasi<br>4. Tidak membatasi persaingan<br>5. Perlu pemantauan dominasi<br><br><strong>Rekomendasi:</strong><br>✅ Evaluasi 6 bulan<br>✅ Kajian konsentrasi pasar<br>✅ Saluran pengaduan<br>✅ Transparansi data<br>✅ Koordinasi KPPU</div><br><strong>📄 Dokumen:</strong><br>• Laporan lengkap (PDF)<br>• Ringkasan eksekutif<br>• Data jawaban (Excel)<br>• Sertifikat simulasi<br><br>🌐 Download: sakpu.kppu.go.id/simulasi/SIM-2025-001<br><br>Ketik MENU untuk kembali', time: '10:20' }
+                ],
+                buttons: [
+                    { text: '🏠 MENU', value: 'MENU', nextStep: 2 },
+                    { text: '🔄 SIMULASI BARU', value: 'BARU', nextStep: 3 },
+                    { text: '📊 RIWAYAT', value: '3', nextStep: 2 }
+                ]
+            }
+        };
+
+        function goToStep(stepNumber) {
+            if (stepNumber < 1 || stepNumber > 9) return;
+            
+            console.log('Going to step:', stepNumber);
+            currentStep = stepNumber;
+            updateStepButtons();
+            renderStep(stepNumber);
+        }
+
+        function updateStepButtons() {
+            const buttons = document.querySelectorAll('.step-btn');
+            buttons.forEach((btn, index) => {
+                const stepNum = index + 1;
+                btn.classList.remove('active');
+                
+                if (stepNum === currentStep) {
+                    btn.classList.add('active');
+                }
+                
+                btn.disabled = false;
+            });
+        }
+
+        function renderStep(stepNumber) {
+            const step = steps[stepNumber];
+            if (!step) {
+                console.error('Step not found:', stepNumber);
+                return;
+            }
+            
+            const chatArea = document.getElementById('chat-area');
+            chatArea.innerHTML = '';
+            
+            const statusText = document.getElementById('status-text');
+            if (stepNumber >= 4 && stepNumber <= 8) {
+                statusText.textContent = 'Simulasi Aktif';
+            } else {
+                statusText.textContent = 'online';
+            }
+            
+            let delay = 0;
+            step.messages.forEach((msg) => {
+                setTimeout(() => {
+                    addMessage(msg.type, msg.text, msg.time);
+                }, delay);
+                delay += 300;
+            });
+            
+            setTimeout(() => {
+                updateQuickButtons(step.buttons);
+            }, delay + 100);
+        }
+
+        function addMessage(type, text, time) {
+            const chatArea = document.getElementById('chat-area');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    ${text}
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+            
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function updateQuickButtons(buttons) {
+            const quickButtonsDiv = document.getElementById('quick-buttons');
+            quickButtonsDiv.innerHTML = '';
+            
+            if (!buttons || buttons.length === 0) return;
+            
+            buttons.forEach(btn => {
+                const button = document.createElement('button');
+                button.className = 'quick-btn';
+                button.textContent = btn.text;
+                button.onclick = () => handleQuickButton(btn.value, btn.nextStep);
+                quickButtonsDiv.appendChild(button);
+            });
+        }
+
+        function handleQuickButton(value, nextStep) {
+            console.log('Button clicked:', value, 'Next step:', nextStep);
+            
+            const time = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            addMessage('user', value, time);
+            
+            if (nextStep) {
+                setTimeout(() => {
+                    goToStep(nextStep);
+                }, 1000);
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const time = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            addMessage('user', message, time);
+            
+            input.value = '';
+            
+            const upperMessage = message.toUpperCase();
+            if (upperMessage === 'MENU') {
+                setTimeout(() => goToStep(2), 500);
+            } else if (upperMessage === 'MULAI') {
+                setTimeout(() => goToStep(4), 500);
+            } else if (upperMessage === 'YA' || upperMessage === 'LANJUT') {
+                setTimeout(() => goToStep(currentStep + 1), 500);
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function resetJourney() {
+            if (confirm('Reset journey dari awal?')) {
+                goToStep(1);
+            }
+        }
+
+        window.onload = function() {
+            console.log('Page loaded, initializing...');
+            updateStepButtons();
+            renderStep(1);
+        };
+    </script>
+</body>
+</html>
