@@ -62,12 +62,12 @@ cd sakpu-whatsapp-mockup
 ### Online
 Akses langsung Pages:
 ```
-[https://USERNAME.github.io/sakpu-whatsapp-mockup](https://mockup-whatsapp-automation.gc-smaart.sytes.net/)
+https://mockup-whatsapp-automation.gc-smaart.sytes.net
 ```
 
 ---
 
-## 📸 Preview
+## Preview
 
 ### Menu Utama
 Bot menyambut pengguna dengan menu lengkap SAKPU.
@@ -86,6 +86,6 @@ Dibuat untuk keperluan desain alur sistem **SAKPU - KPPU RI**.
 
 ---
 
-## 📄 Lisensi
+## Lisensi
 
 © 2026 KPPU RI — All Rights Reserved.
